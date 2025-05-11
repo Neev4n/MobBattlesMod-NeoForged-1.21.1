@@ -19,6 +19,10 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    maven {
+        name = 'CurseMaven'
+        url = 'https://cursemaven.com'
+    }
 }
 
 base {
@@ -127,7 +131,7 @@ dependencies {
 
     // Example mod dependency using a file as dependency
     // implementation files("libs/coolmod-${mc_version}-${coolmod_version}.jar")
-
+    implementation "curse.maven:lendercataclysm-551586:6501450"
     // Example project dependency using a sister or child project:
     // implementation project(":myproject")
 
