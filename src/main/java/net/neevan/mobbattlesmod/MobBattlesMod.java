@@ -1,5 +1,7 @@
 package net.neevan.mobbattlesmod;
 
+import net.neevan.mobbattlesmod.command.MobHealthCommand;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -39,7 +41,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class MobBattlesMod
 {
     public static final String MOD_ID = "mobbattlesmod";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public MobBattlesMod(IEventBus modEventBus, ModContainer modContainer)
     {
         // Register the commonSetup method for modloading
@@ -66,6 +68,11 @@ public class MobBattlesMod
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
 
+    }
+
+    @SubscribeEvent
+    public void onRegisterCommand(RegisterCommandsEvent event){
+        MobHealthCommand.register(event.getDispatcher());
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
