@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.neevan.mobbattlesmod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MobMixin",
+    "WardenMixin"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
