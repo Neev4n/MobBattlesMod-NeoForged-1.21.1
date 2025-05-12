@@ -6,15 +6,19 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 
+import java.util.UUID;
+
 public class MobBattlesData extends SavedData {
 
     private boolean bossExists = false;
+    private UUID bossUUID = null;
 
 
     @Override
     public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
 
         tag.putBoolean("BossExists", bossExists);
+        tag.putUUID("BossUUID", bossUUID);
         return tag;
     }
 
@@ -22,6 +26,7 @@ public class MobBattlesData extends SavedData {
 
         MobBattlesData data = new MobBattlesData();
         data.bossExists = tag.getBoolean("BossExists");
+        data.bossUUID = tag.getUUID("BossUUID");
         return data;
 
     }
@@ -37,6 +42,14 @@ public class MobBattlesData extends SavedData {
 
     public void setBossExists(boolean bossExists) {
         this.bossExists = bossExists;
+    }
+
+    public UUID getBossUUID(){
+        return bossUUID;
+    }
+
+    public void setBossUUID(UUID uuid){
+        this.bossUUID = uuid;
     }
 
     public static MobBattlesData get(ServerLevel level){

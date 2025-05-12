@@ -33,12 +33,19 @@ public class EventHandler {
 
             //cataclysm boss
             if(CataclysmUtil.isCataclysmBoss(boss)){
+
+                MobBattlesData data = MobBattlesData.get(serverLevel);
+                data.setBossExists(true);
+                data.setBossUUID(boss.getUUID());
+
                 MobBattlesMod.LOGGER.info("boss spanwed: " + boss.toString());
+
                 for (Entity entityOther : serverLevel.getEntities().getAll()) {
                     if (entityOther instanceof Mob mob && !entityOther.is(boss)) {
 
                         if(mob instanceof Warden warden){
                             LivingEntity wardenTarget = warden.getTarget();
+
                             if(wardenTarget != null && !CataclysmUtil.isCataclysmBoss(wardenTarget)){
                                 warden.getBrain().eraseMemory(MemoryModuleType.ROAR_TARGET);
                                 warden.getBrain().setMemory(MemoryModuleType.ATTACK_TARGET, boss);
@@ -54,8 +61,8 @@ public class EventHandler {
 
 
                     }
-                    MobBattlesData data = MobBattlesData.get(serverLevel);
-                    data.setBossExists(true);
+
+
                 }
             }
         }
@@ -73,7 +80,7 @@ public class EventHandler {
 
                 MobBattlesData data = MobBattlesData.get(serverLevel);
                 data.setBossExists(false);
-
+                data.setBossUUID(null);
 
             }
         }
