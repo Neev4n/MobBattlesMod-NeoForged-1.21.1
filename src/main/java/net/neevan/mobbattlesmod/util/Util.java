@@ -1,10 +1,13 @@
 package net.neevan.mobbattlesmod.util;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.neevan.mobbattlesmod.cataclysm.CataclysmUtil;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,23 @@ public class Util {
 
         // Check if the mob's EntityType is in the list of valid fighter mobs
         return specialEntityTypes.contains(entity.getType());
+    }
+
+    public static boolean tooClose(Entity mob, Entity target){
+        if(mob == null || target == null){
+            return false;
+        }
+        return mob.distanceTo(target) < 5;
+
+    }
+
+    @Nullable
+    public static ServerLevel getServerLevelFromMob(LivingEntity living){
+        if(living.getServer() != null){
+            return living.getServer().getLevel(living.level().dimension());
+        }
+
+        return null;
     }
 
 }
